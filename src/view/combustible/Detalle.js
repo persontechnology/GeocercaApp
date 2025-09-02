@@ -1,9 +1,5 @@
-import React, {useState, useEffect,useContext} from 'react';
-
-import {
-  View,
-  PermissionsAndroid
-} from 'react-native';
+import React, { useState, useEffect, useContext } from 'react';
+import { View, PermissionsAndroid } from 'react-native';
 
 import { Center, ScrollView, useToast, Box, Text, Stack, Heading, HStack, Button, Pressable, Avatar, FormControl, Input } from 'native-base'
 import { Spacer, Flex, Badge, NativeBaseProvider } from "native-base";
@@ -72,32 +68,24 @@ const App = ({ route, navigation }) => {
   const [imagePath, setimagePath] = useState(urlFotoCamara);
   const [mostrarBotonFinalizar, setmostrarBotonFinalizar] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-
-
-
-
   // function to check permissions and get Location
   const getLocation = () => {
     const result = requestLocationPermission();
     result.then(res => {
-      
+
       if (res) {
         Geolocation.getCurrentPosition(
           position => {
-            
             setLocation(position);
           },
           error => {
-      
             setLocation(false);
           },
-          {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
+          { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 },
         );
       }
     });
-    
   };
-
 
   const tomarFoto = async () => {
     try {
@@ -144,8 +132,8 @@ const App = ({ route, navigation }) => {
         setimagePath(urlFotoCamara);
 
         navigation.navigate({
-            name: 'InicioCombustible',
-            params: { estado: (Math.random() + 1).toString(36).substring(7) }
+          name: 'InicioCombustible',
+          params: { estado: (Math.random() + 1).toString(36).substring(7) }
         })
 
       }
@@ -167,59 +155,59 @@ const App = ({ route, navigation }) => {
   }
 
 
-  useEffect(()=>{
+  useEffect(() => {
     getLocation()
-  },[location])
+  }, [location])
 
 
-  if(location){
+  if (location) {
     return (
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-     
-      <Box alignItems="center"  pt="2">
-            <Pressable onPress={() => {}} rounded="8" overflow="hidden" borderWidth="1" borderColor="coolGray.300" maxW="96" shadow="3" bg="coolGray.100" p="5">
-              <Box>
-                <HStack alignItems="center">
-                  <Badge colorScheme="darkBlue" _text={{
+
+        <Box alignItems="center" pt="2">
+          <Pressable onPress={() => { }} rounded="8" overflow="hidden" borderWidth="1" borderColor="coolGray.300" maxW="96" shadow="3" bg="coolGray.100" p="5">
+            <Box>
+              <HStack alignItems="center">
+                <Badge colorScheme="darkBlue" _text={{
                   color: "white"
                 }} variant="solid" rounded="4">
-                    {fecha}
-                  </Badge>
-                  <Spacer />
-                  <Text fontSize={10} color="coolGray.800">
+                  {fecha}
+                </Badge>
+                <Spacer />
+                <Text fontSize={10} color="coolGray.800">
                   Código: {codigo}
-                  </Text>
-                </HStack>
-                <Text color="coolGray.800" mt="3" fontWeight="medium" fontSize="sm">
-                  N° de Despacho de Combustible: {numero}
                 </Text>
-                <Text mt="2" fontSize="sm" color="coolGray.700">
+              </HStack>
+              <Text color="coolGray.800" mt="3" fontWeight="medium" fontSize="sm">
+                N° de Despacho de Combustible: {numero}
+              </Text>
+              <Text mt="2" fontSize="sm" color="coolGray.700">
                 Concepto: {concepto}
-                </Text>
-                <Text mt="2" fontSize="sm" color="coolGray.700">
+              </Text>
+              <Text mt="2" fontSize="sm" color="coolGray.700">
                 Vehículo: {vehiculo}
-                </Text>
-                <Text mt="2" fontSize="sm" color="coolGray.700">
-                
+              </Text>
+              <Text mt="2" fontSize="sm" color="coolGray.700">
+
                 Descripcion: {observaciones}
+              </Text>
+              <Flex>
+                <Text mt="2" fontSize={12} fontWeight="medium" color="darkBlue.600">
+                  Último Kilometraje: {ultimoKilometraje}
                 </Text>
-                <Flex>
-                  <Text mt="2" fontSize={12} fontWeight="medium" color="darkBlue.600">
-                    Último Kilometraje: {ultimoKilometraje}
-                  </Text>
-                </Flex>
-              </Box>
-            </Pressable>
+              </Flex>
+            </Box>
+          </Pressable>
         </Box>
 
 
-      <Center flex={1}>
-        
+        <Center flex={1}>
 
-        <Box w="95%" >
-        <FormControl mb="5">
-          <FormControl.Label>Captura una foto de evidencia.</FormControl.Label>
-        </FormControl>
+
+          <Box w="95%" >
+            <FormControl mb="5">
+              <FormControl.Label>Captura una foto de evidencia.</FormControl.Label>
+            </FormControl>
 
 
             <Pressable onPress={tomarFoto} style={({ pressed }) => [
@@ -246,40 +234,40 @@ const App = ({ route, navigation }) => {
             {
               mostrarBotonFinalizar ? (
                 <Button mt="2" colorScheme="danger" onPress={() => navigation.navigate({
-                    name: 'InicioCombustible',
-                    params: { estado: (Math.random() + 1).toString(36).substring(7) }
-                  })
+                  name: 'InicioCombustible',
+                  params: { estado: (Math.random() + 1).toString(36).substring(7) }
+                })
                 }>
                   Finalizar despacho
                 </Button>
               ) : (
                 <>
-                <FormControl mb="5">
-                  <FormControl.Label>Ingrese valor consumido.</FormControl.Label>
-                  <Input keyboardType='decimal-pad' onChangeText={setService} value={service} />
-                  
-                </FormControl>
+                  <FormControl mb="5">
+                    <FormControl.Label>Ingrese valor consumido.</FormControl.Label>
+                    <Input keyboardType='decimal-pad' onChangeText={setService} value={service} />
 
-                <Button mt="2" colorScheme="warning" onPress={enviarFotox} isLoadingText={"Enviando..."} isLoading={cargando}>
-                  Enviar
-                </Button>
+                  </FormControl>
+
+                  <Button mt="2" colorScheme="warning" onPress={enviarFotox} isLoadingText={"Enviando..."} isLoading={cargando}>
+                    Enviar
+                  </Button>
                 </>
               )
             }
 
-          </Box> 
+          </Box>
 
-      </Center>
-    </ScrollView>
+        </Center>
+      </ScrollView>
     );
-  }else{
+  } else {
     return (
       <View>
         <Text>UBICACIÓN DE SU DISPOSITIVO NO ACTIVADO</Text>
       </View>
     );
   }
-  
+
 };
 
 

@@ -69,7 +69,7 @@ export default function Index({ navigation, route }) {
                                 </Alert>
                             </View>
                             {
-                                data.map(function(dc,i) {
+                                data.map(function (dc, i) {
                                     return (
                                         <Pressable key={i} my={1} onPress={
                                             () => {
@@ -81,7 +81,7 @@ export default function Index({ navigation, route }) {
                                                 isHovered,
                                                 isPressed
                                             }) => {
-                                                return <Box borderColor="coolGray.300" shadow="3" bg={isPressed ? "success.200" :  "warning.50"} p="3" rounded="8" style={{
+                                                return <Box borderColor="coolGray.300" shadow="3" bg={isPressed ? "success.200" : "warning.50"} p="3" rounded="8" style={{
                                                     transform: [{
                                                         scale: isPressed ? 0.96 : 1
                                                     }]
@@ -90,7 +90,7 @@ export default function Index({ navigation, route }) {
 
 
                                                         <Text fontSize={'md'} color="coolGray.800">
-                                                           N°: {dc.numero}
+                                                            N°: {dc.numero}
                                                         </Text>
                                                         <Spacer />
                                                         <Badge colorScheme={'warning'} _text={{
@@ -107,7 +107,7 @@ export default function Index({ navigation, route }) {
                                                     </Text>
                                                     <Flex>
                                                         <HStack space={"1"}>
-                                                           
+
                                                             <Text fontSize={12} fontWeight="medium" color={'yellow.600'}>
                                                                 Vehículo: {dc.vehiculo}
                                                             </Text>
@@ -122,7 +122,6 @@ export default function Index({ navigation, route }) {
                         </View>
                     }
                 </Box>
-
             </View>
         </ScrollView>
     );
